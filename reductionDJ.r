@@ -1,5 +1,5 @@
-positive = read.csv('Tyrosine/positive_train5.csv')
-negative = read.csv('Tyrosine/negative_train5.csv')
+positive = read.csv('Tyrosine/positive_train.csv')
+negative = read.csv('Tyrosine/negative_train.csv')
 
 ppm = positive[,1] # First column are the variable names
 train = t(cbind(positive[,-1],negative[,-1])) # combine them except the first column
@@ -32,11 +32,11 @@ regions.end[n.regions] = ncol(train)-1
 
 engineer_features = T
 if (engineer_features == T) {
+  # ensure the results are repeatable
+  set.seed(7)
   random.order = sample(1:nrow(train),nrow(train))
   train = train[random.order,]
   
-  # ensure the results are repeatable
-  set.seed(7)
   # load the library
   library(mlbench)
   library(caret)
@@ -49,7 +49,7 @@ if (engineer_features == T) {
   print('before rfeControl')
   control <- rfeControl(functions=rfFuncs, method="cv", number=10)
   
-  for (j in 5:5) {
+  for (j in 1:n.regions) {
     # run the RFE algorithm
     print('before rfe')
     #results <- rfe(train[,1:10], train[,length(train)], sizes=c(1:10), rfeControl=control)
@@ -60,13 +60,16 @@ if (engineer_features == T) {
     # list the chosen features
     predictors(results)
     # plot the results
+    pdf(file=paste("ORGplot_",j,".pdf",sep=""), width= 7, height = 3.5)
     plot(results, type=c("g", "o"))
+    dev.off()
     #features = results.data.frame
     #colnames(features) = cnames
     #features$label = train$label
     ####
     
-    write.csv(results$optVariables, file=paste(j,"Reg.csv",sep=""))
+    write.csv(results$optVariables, paste("ORGset_",j,".csv",sep=""))
+    
   }
   
 #   
