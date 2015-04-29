@@ -68,7 +68,7 @@ if (engineer_features == T) {
     #features$label = train$label
     ####
     
-    write.csv(results$optVariables, paste("ORGset_",j,".csv",sep=""))
+    write.csv(results$optVariables, file=paste("ORGset_",j,".csv",sep=""))
     
   }
   
