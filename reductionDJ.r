@@ -39,9 +39,9 @@ if (engineer_features == T) {
   
   # load the library
   library(mlbench)
-  library(caret)
   library(lattice)
   library(ggplot2)
+  library(caret)
   library(e1071)
   # load the data
   #data(train)
