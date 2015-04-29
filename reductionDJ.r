@@ -1,5 +1,3 @@
-setwd('/Users/Eduardo/Dropbox/Developer/R/Meta')
-getwd()
 positive = read.csv('Tyrosine/positive_train5.csv')
 negative = read.csv('Tyrosine/negative_train5.csv')
 
@@ -51,11 +49,11 @@ if (engineer_features == T) {
   print('before rfeControl')
   control <- rfeControl(functions=rfFuncs, method="cv", number=10)
   
-  for (j in 1:1) {
+  for (j in 2:2) {
     # run the RFE algorithm
     print('before rfe')
     #results <- rfe(train[,1:10], train[,length(train)], sizes=c(1:10), rfeControl=control)
-    results <- rfe(train[,regions.start[j]:regions.end[j]], train[,length(train)], sizes=c(regions.start[j]:regions.end[j]), rfeControl=control)
+    results <- rfe(train[,regions.start[j]:regions.end[j]], train[,length(train)], sizes=c(1:(regions.end[j]-regions.start[j]+1)), rfeControl=control)
     #results <- rfe(train[50:150,1:199], train[50:150,length(train)], sizes=c(1:199), rfeControl=control)
     # summarize the results
     print(results)
@@ -68,8 +66,7 @@ if (engineer_features == T) {
     #features$label = train$label
     ####
   }
-  write.csv(results$optVariables, file="1Reg.csv")
-  results$variables
+  write.csv(results$optVariables, file="2Reg.csv")
 #   
 #   features = as.data.frame(features)
 #   colnames(features) = cnames
