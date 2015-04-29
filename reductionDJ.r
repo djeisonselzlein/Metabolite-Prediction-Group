@@ -65,8 +65,10 @@ if (engineer_features == T) {
     #colnames(features) = cnames
     #features$label = train$label
     ####
+    
+    write.csv(results$optVariables, file=paste(j,"Reg.csv",sep=""))
   }
-  write.csv(results$optVariables, file="5Reg.csv")
+  
 #   
 #   features = as.data.frame(features)
 #   colnames(features) = cnames
