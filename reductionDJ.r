@@ -68,6 +68,7 @@ if (engineer_features == T) {
     #features$label = train$label
     ####
   }
+  write.csv(results$optVariables, file="1Reg.csv")
   results$variables
 #   
 #   features = as.data.frame(features)
@@ -77,6 +78,9 @@ if (engineer_features == T) {
 } else {
   features = train
 }  
+
+
+
 
 # k-fold cross-validation loop
 library(rpart)
