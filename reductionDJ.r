@@ -49,7 +49,7 @@ if (engineer_features == T) {
   print('before rfeControl')
   control <- rfeControl(functions=rfFuncs, method="cv", number=10)
   
-  for (j in 2:2) {
+  for (j in 5:5) {
     # run the RFE algorithm
     print('before rfe')
     #results <- rfe(train[,1:10], train[,length(train)], sizes=c(1:10), rfeControl=control)
@@ -66,7 +66,7 @@ if (engineer_features == T) {
     #features$label = train$label
     ####
   }
-  write.csv(results$optVariables, file="2Reg.csv")
+  write.csv(results$optVariables, file="5Reg.csv")
 #   
 #   features = as.data.frame(features)
 #   colnames(features) = cnames
